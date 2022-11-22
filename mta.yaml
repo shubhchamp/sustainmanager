@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: cprail-survey-cprailmanager
+description: Create Assessment
+version: 0.0.1
+modules:
+- name: cprail-survey-cprailmanager-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: cprail-survey-cprailmanager-destination-service
+    parameters:
+      content-target: true
+  - name: cprail-survey-cprailmanager-repo-host
+    parameters:
+      service-key:
+        name: cprail-survey-cprailmanager-repo-host-key
+  - name: cprail-survey-cprailmanager-uaa
+    parameters:
+      service-key:
+        name: cprail-survey-cprailmanager-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: cprail-survey-cprailmanager_html_repo_host
+          ServiceInstanceName: cprail-survey-cprailmanager-html5-srv
+          ServiceKeyName: cprail-survey-cprailmanager-repo-host-key
+          sap.cloud.service: cprail-survey-cprailmanager
+        - Authentication: OAuth2UserTokenExchange
+          Name: cprail-survey-cprailmanager_uaa
+          ServiceInstanceName: cprail-survey-cprailmanager-xsuaa-srv
+          ServiceKeyName: cprail-survey-cprailmanager-uaa-key
+          sap.cloud.service: cprail-survey-cprailmanager
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: cprail-survey-cprailmanager-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: cprail-survey-cprailmanager-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - cprailsurveycprailmanager.zip
+      name: cprailsurveycprailmanager
+      target-path: resources/
+- name: cprailsurveycprailmanager
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: cprail-survey-cprailmanager-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: cprail-survey-cprailmanager-destination-service
+    service-plan: lite
+- name: cprail-survey-cprailmanager-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: cprail-survey-cprailmanager-xsuaa-srv
+    service-plan: application
+- name: cprail-survey-cprailmanager-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: cprail-survey-cprailmanager-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
