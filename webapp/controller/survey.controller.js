@@ -32,7 +32,7 @@ sap.ui.define([
                 let aMonth=[];
                 for (let monthindex = 0; monthindex < 12; monthindex++) {
                     const oObj={
-                        key:monthindex,
+                        key:month[monthindex],
                         value:month[monthindex]
                     };
                     aMonth.push(oObj);
@@ -43,7 +43,7 @@ sap.ui.define([
                 let aLocation=[];
                 for (let locationindex = 0; locationindex < 3; locationindex++) {
                     const oObj={
-                        key:locationindex,
+                        key:location[locationindex],
                         value:location[locationindex]
                     };
                     aLocation.push(oObj);
@@ -69,14 +69,51 @@ sap.ui.define([
                 {
                     emailID:"bbraun@convergentis.com",
                     Name:"Brad Braun"
+                },
+                {
+                    emailID:"demo@convergentis.com",
+                    Name:"Demo User"
                 }
                 ];
                 this.getView().getModel("dataItems").setProperty("/Users",aUsers);
+                const aType = [{
+                    key:"01",
+                    value:"Emission"
+                },
+                {
+                    key:"02",
+                    value:"Waste"
+                },
+                {
+                    key:"03",
+                    value:"Water"
+                }];
+                this.getView().getModel("dataItems").setProperty("/Types",aType);
 
 
             },
             onSurveySubmit: function(){
-                sap.m.MessageBox.success("Assessment created Successfully")
+                let sUsers="";
+                this.byId("multiInput").getTokens().forEach(element => {
+                    sUsers= sUsers? `${sUsers},${element.getKey()}`: element.getKey()
+                });
+                 const obj={
+                    
+                        "ReportYear": this.byId("Year").getSelectedKey(),
+                        "ReportMonth": this.byId("month").getSelectedKey(),
+                        "OfficeLocation":this.byId("office").getSelectedKey(),
+                        "Users": sUsers,
+                        "Type": this.byId("Type").getSelectedKey(),
+                        "Status": "Open"
+                 };
+                 this.getView().getModel().create("/CreateAssessment",obj,{
+                    success: function(){
+                        sap.m.MessageBox.success("Assessment created Successfully")
+                    },error: function(){
+                        sap.m.MessageBox.success("Error while creating assessment")
+                    }
+                 })
+                
             }
         });
     });

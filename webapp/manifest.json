@@ -11,12 +11,13 @@
         "description": "{{appDescription}}",
         "dataSources": {
             "mainService": {
-                "uri": "catalog/",
+                "uri": "/browse/",
                 "type": "OData",
                 "settings": {
-                    "annotations": [],
-                    "localUri": "localService/metadata.xml",
-                    "odataVersion": "4.0"
+                    "annotations": [
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml"
                 }
             }
         },
@@ -73,13 +74,8 @@
             },
             "": {
                 "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "synchronizationMode": "None",
-                    "operationMode": "Server",
-                    "autoExpandSelect": true,
-                    "earlyRequests": true
-                }
+                "preload": true
+                
             }
         },
         "resources": {

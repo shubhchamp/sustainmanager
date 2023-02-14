@@ -17,14 +17,14 @@
                                 <VBox class="sapUiSmallMargin">
                                     <f:SimpleForm layout="ResponsiveGridLayout" editable="true" labelSpanXL="2" labelSpanL="3" labelSpanM="3" maxContainerCols="1" singleContainerFullSize="true">
                                         <Label text="Select your report Year "/>
-                                        <ComboBox id="id-1666856224956-97" items="{dataItems>/Years}"  change=".processSteps">
+                                        <ComboBox id="Year" items="{dataItems>/Years}"  change=".processSteps">
                                             <core:ListItem text="{dataItems>value}" key="{dataItems>key}"/>
                                             <layoutData>
                                                 <l:GridData span="XL3 L3 M4 S12"/>
                                             </layoutData>
                                         </ComboBox>
                                         <Label text="Select your reporting Month"/>
-                                        <ComboBox id="id-1666856362775-164" items="{dataItems>/Months}" change=".processSteps">
+                                        <ComboBox id="month" items="{dataItems>/Months}" change=".processSteps">
                                             <core:ListItem text="{dataItems>value}" key="{dataItems>key}"/>
                                             <layoutData>
                                                 <l:GridData span="XL3 L3 M4 S12"/>
@@ -37,7 +37,7 @@
                                 <VBox class="sapUiSmallMargin">
                                     <f:SimpleForm layout="ResponsiveGridLayout" editable="true" labelSpanXL="2" labelSpanL="3" labelSpanM="3" maxContainerCols="1" singleContainerFullSize="true">
                                         <Label text="Select your office location"/>
-                                        <ComboBox id="id-1666856940113-342" items="{dataItems>/Locations}"  change=".processSteps">
+                                        <ComboBox id="office" items="{dataItems>/Locations}"  change=".processSteps">
                                             <core:ListItem text="{dataItems>value}" key="{dataItems>key}"/>
                                             <layoutData>
                                                 <l:GridData span="XL3 L3 M4 S12"/>
@@ -58,56 +58,19 @@
                                                 
 
                                         </MultiInput>
-                                        <!-- <Label text="Emission Scope"/>
-                                        <ComboBox id="id-1666857069197-376" items="{dataItems>/id-1666857069197-376/items}" change=".processSteps">
-                                            <core:ListItem text="{dataItems>value}" key="{dataItems>key}"/>
-                                            <layoutData>
-                                                <l:GridData span="XL3 L3 M4 S12"/>
-                                            </layoutData>
-                                        </ComboBox> -->
-                                    </f:SimpleForm>
-                                    <!-- <Text text="Enter Emission Details"/>
-                                    <f:SimpleForm layout="ResponsiveGridLayout" editable="true" labelSpanXL="2" labelSpanL="3" labelSpanM="3" maxContainerCols="1" singleContainerFullSize="true">
-                                        <Label text="Emission"/>
-                                        <ComboBox id="id-1666857183879-430" items="{dataItems>/id-1666857183879-430/items}"  change=".processSteps">
+                                        <Label text="Assessment Type"/>
+                                         <ComboBox id="Type" items="{dataItems>/Types}">
                                             <core:ListItem text="{dataItems>value}" key="{dataItems>key}"/>
                                             <layoutData>
                                                 <l:GridData span="XL3 L3 M4 S12"/>
                                             </layoutData>
                                         </ComboBox>
-                                    </f:SimpleForm> -->
+                                       
+                                    </f:SimpleForm>
+                                   
                                 </VBox>
                             </WizardStep>
-                            <!-- <WizardStep id="id-1666858703972-584" title="Enter Emission Details " icon="" activate=".onStepActivate">
-                                <VBox class="sapUiSmallMargin">
-                                    <f:SimpleForm layout="ResponsiveGridLayout" editable="true" labelSpanXL="2" labelSpanL="3" labelSpanM="3" maxContainerCols="1" singleContainerFullSize="true">
-                                        <Label text="CO2"/>
-                                        <Input id="id-1666884748020-305" type="Number"  change=".processSteps">
-                                            <layoutData>
-                                                <l:GridData span="XL3 L3 M4 S12"/>
-                                            </layoutData>
-                                        </Input>
-                                        <Label text="CH4"/>
-                                        <Input id="id-1666884799734-322" type="Number"  change=".processSteps">
-                                            <layoutData>
-                                                <l:GridData span="XL3 L3 M4 S12"/>
-                                            </layoutData>
-                                        </Input>
-                                        <Label text="NO2"/>
-                                        <Input id="id-1666884832214-339" type="Number"  change=".processSteps">
-                                            <layoutData>
-                                                <l:GridData span="XL3 L3 M4 S12"/>
-                                            </layoutData>
-                                        </Input>
-                                        <Label text="Total CO2 Equivalent"/>
-                                        <Input id="id-1666884872352-368" type="Number"  change=".processSteps">
-                                            <layoutData>
-                                                <l:GridData span="XL3 L3 M4 S12"/>
-                                            </layoutData>
-                                        </Input>
-                                    </f:SimpleForm>
-                                </VBox>
-                            </WizardStep> -->
+                            
                         </Wizard>
                     </content>
                 </Page>
