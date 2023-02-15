@@ -18,7 +18,7 @@ server:
           version: '' # The UI5 version, for instance, 1.78.1. Empty string means latest version
         backend:
           - path: /browse
-            destination: Emission_CAP
+            destination: Emission_CAP_V2
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

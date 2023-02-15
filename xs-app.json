@@ -5,7 +5,7 @@
     {
       "source": "^/browse/(.*)$",
       "target": "/browse/$1",
-      "destination": "Emission_CAP",
+      "destination": "Emission_CAP_V2",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },
